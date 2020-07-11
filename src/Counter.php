@@ -30,15 +30,15 @@ final class Counter
      */
     public function countInSourceString(string $source): LinesOfCode
     {
-        $loc    = substr_count($source, "\n");
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $linesOfCode = substr_count($source, "\n");
+        $parser      = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
 
         try {
             $nodes = $parser->parse($source);
 
             assert($nodes !== null);
 
-            return $this->countInAbstractSyntaxTree($loc, $nodes);
+            return $this->countInAbstractSyntaxTree($linesOfCode, $nodes);
 
             // @codeCoverageIgnoreStart
         } catch (Error $error) {
@@ -56,7 +56,7 @@ final class Counter
      *
      * @throws RuntimeException
      */
-    public function countInAbstractSyntaxTree(int $loc, array $nodes): LinesOfCode
+    public function countInAbstractSyntaxTree(int $linesOfCode, array $nodes): LinesOfCode
     {
         $traverser = new NodeTraverser;
         $visitor   = new LineCountingVisitor;
@@ -76,9 +76,14 @@ final class Counter
         }
         // @codeCoverageIgnoreEnd
 
-        $cloc  = $visitor->commentLinesOfCode();
-        $ncloc = $loc - $cloc;
+        $commentLinesOfCode    = $visitor->commentLinesOfCode();
+        $nonCommentLinesOfCode = $linesOfCode - $commentLinesOfCode;
 
-        return new LinesOfCode($loc, $cloc, $ncloc, $visitor->logicalLinesOfCode());
+        return new LinesOfCode(
+            $linesOfCode,
+            $commentLinesOfCode,
+            $nonCommentLinesOfCode,
+            $visitor->logicalLinesOfCode()
+        );
     }
 }
