@@ -9,6 +9,9 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+/**
+ * @psalm-immutable
+ */
 final class LinesOfCode
 {
     /**
