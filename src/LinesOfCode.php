@@ -29,8 +29,28 @@ final class LinesOfCode
      */
     private $ncloc;
 
+    /**
+     * @throws IllogicalValuesException
+     * @throws NegativeValueException
+     */
     public function __construct(int $loc, int $cloc, int $ncloc)
     {
+        if ($loc < 0) {
+            throw new NegativeValueException('$loc must not be negative');
+        }
+
+        if ($cloc < 0) {
+            throw new NegativeValueException('$cloc must not be negative');
+        }
+
+        if ($ncloc < 0) {
+            throw new NegativeValueException('$ncloc must not be negative');
+        }
+
+        if ($loc - $cloc !== $ncloc) {
+            throw new IllogicalValuesException('$loc !== $cloc + $ncloc');
+        }
+
         $this->loc   = $loc;
         $this->cloc  = $cloc;
         $this->ncloc = $ncloc;

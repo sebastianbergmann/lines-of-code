@@ -23,7 +23,7 @@ final class LinesOfCodeTest extends TestCase
      */
     public function testHasLinesOfCode(): void
     {
-        $this->assertSame(2, $this->linesOfCode()->loc());
+        $this->assertSame(1, $this->linesOfCode()->loc());
     }
 
     /**
@@ -39,11 +39,46 @@ final class LinesOfCodeTest extends TestCase
      */
     public function testHasNonCommentLinesOfCode(): void
     {
-        $this->assertSame(1, $this->linesOfCode()->ncloc());
+        $this->assertSame(0, $this->linesOfCode()->ncloc());
+    }
+
+    public function testLinesOfCodeCannotBeNegative(): void
+    {
+        $this->expectException(NegativeValueException::class);
+        $this->expectExceptionMessage('$loc must not be negative');
+
+        new LinesOfCode(-1, 0, 0);
+    }
+
+    public function testCommentLinesOfCodeCannotBeNegative(): void
+    {
+        $this->expectException(NegativeValueException::class);
+        $this->expectExceptionMessage('$cloc must not be negative');
+
+        new LinesOfCode(0, -1, 0);
+    }
+
+    public function testNonCommentLinesOfCodeCannotBeNegative(): void
+    {
+        $this->expectException(NegativeValueException::class);
+        $this->expectExceptionMessage('$ncloc must not be negative');
+
+        new LinesOfCode(0, 0, -1);
+    }
+
+    /**
+     * @testdox Lines of Code = Comment Lines of Code + Non-Comment Lines of Code
+     */
+    public function testNumbersHaveToMakeSense(): void
+    {
+        $this->expectException(IllogicalValuesException::class);
+        $this->expectExceptionMessage('$loc !== $cloc + $ncloc');
+
+        new LinesOfCode(1, 2, 2);
     }
 
     private function linesOfCode(): LinesOfCode
     {
-        return new LinesOfCode(2, 1, 1);
+        return new LinesOfCode(1, 1, 0);
     }
 }
