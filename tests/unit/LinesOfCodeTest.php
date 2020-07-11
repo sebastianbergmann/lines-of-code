@@ -42,12 +42,20 @@ final class LinesOfCodeTest extends TestCase
         $this->assertSame(0, $this->linesOfCode()->nonCommentLinesOfCode());
     }
 
+    /**
+     * @testdox Has Logical Lines of Code (LLOC)
+     */
+    public function testHasLogicalLinesOfCode(): void
+    {
+        $this->assertSame(0, $this->linesOfCode()->logicalLinesOfCode());
+    }
+
     public function testLinesOfCodeCannotBeNegative(): void
     {
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$linesOfCode must not be negative');
 
-        new LinesOfCode(-1, 0, 0);
+        new LinesOfCode(-1, 0, 0, 0);
     }
 
     public function testCommentLinesOfCodeCannotBeNegative(): void
@@ -55,7 +63,7 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$commentLinesOfCode must not be negative');
 
-        new LinesOfCode(0, -1, 0);
+        new LinesOfCode(0, -1, 0, 0);
     }
 
     public function testNonCommentLinesOfCodeCannotBeNegative(): void
@@ -63,7 +71,15 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$nonCommentLinesOfCode must not be negative');
 
-        new LinesOfCode(0, 0, -1);
+        new LinesOfCode(0, 0, -1, 0);
+    }
+
+    public function testLogicalLinesOfCodeCannotBeNegative(): void
+    {
+        $this->expectException(NegativeValueException::class);
+        $this->expectExceptionMessage('$logicalLinesOfCode must not be negative');
+
+        new LinesOfCode(0, 0, 0, -1);
     }
 
     /**
@@ -74,11 +90,11 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(IllogicalValuesException::class);
         $this->expectExceptionMessage('$linesOfCode !== $commentLinesOfCode + $nonCommentLinesOfCode');
 
-        new LinesOfCode(1, 2, 2);
+        new LinesOfCode(1, 2, 2, 0);
     }
 
     private function linesOfCode(): LinesOfCode
     {
-        return new LinesOfCode(1, 1, 0);
+        return new LinesOfCode(1, 1, 0, 0);
     }
 }

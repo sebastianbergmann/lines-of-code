@@ -79,6 +79,6 @@ final class Counter
         $cloc  = $visitor->commentLinesOfCode();
         $ncloc = $loc - $cloc;
 
-        return new LinesOfCode($loc, $cloc, $ncloc);
+        return new LinesOfCode($loc, $cloc, $ncloc, $visitor->logicalLinesOfCode());
     }
 }

@@ -30,10 +30,15 @@ final class LinesOfCode
     private $nonCommentLinesOfCode;
 
     /**
+     * @var int
+     */
+    private $logicalLinesOfCode;
+
+    /**
      * @throws IllogicalValuesException
      * @throws NegativeValueException
      */
-    public function __construct(int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode)
+    public function __construct(int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode)
     {
         if ($linesOfCode < 0) {
             throw new NegativeValueException('$linesOfCode must not be negative');
@@ -47,6 +52,10 @@ final class LinesOfCode
             throw new NegativeValueException('$nonCommentLinesOfCode must not be negative');
         }
 
+        if ($logicalLinesOfCode < 0) {
+            throw new NegativeValueException('$logicalLinesOfCode must not be negative');
+        }
+
         if ($linesOfCode - $commentLinesOfCode !== $nonCommentLinesOfCode) {
             throw new IllogicalValuesException('$linesOfCode !== $commentLinesOfCode + $nonCommentLinesOfCode');
         }
@@ -54,6 +63,7 @@ final class LinesOfCode
         $this->linesOfCode           = $linesOfCode;
         $this->commentLinesOfCode    = $commentLinesOfCode;
         $this->nonCommentLinesOfCode = $nonCommentLinesOfCode;
+        $this->logicalLinesOfCode    = $logicalLinesOfCode;
     }
 
     public function linesOfCode(): int
@@ -69,5 +79,10 @@ final class LinesOfCode
     public function nonCommentLinesOfCode(): int
     {
         return $this->nonCommentLinesOfCode;
+    }
+
+    public function logicalLinesOfCode(): int
+    {
+        return $this->logicalLinesOfCode;
     }
 }

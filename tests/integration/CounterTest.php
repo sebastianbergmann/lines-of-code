@@ -30,6 +30,7 @@ final class CounterTest extends TestCase
         $this->assertSame(51, $count->linesOfCode());
         $this->assertSame(13, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
+        $this->assertSame(23, $count->logicalLinesOfCode());
     }
 
     public function testCountsLinesOfCodeInSourceString(): void
@@ -39,6 +40,7 @@ final class CounterTest extends TestCase
         $this->assertSame(51, $count->linesOfCode());
         $this->assertSame(13, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
+        $this->assertSame(23, $count->logicalLinesOfCode());
     }
 
     public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
@@ -52,5 +54,6 @@ final class CounterTest extends TestCase
         $this->assertSame(51, $count->linesOfCode());
         $this->assertSame(13, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
+        $this->assertSame(23, $count->logicalLinesOfCode());
     }
 }
