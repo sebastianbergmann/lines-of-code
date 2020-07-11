@@ -17,57 +17,57 @@ final class LinesOfCode
     /**
      * @var int
      */
-    private $loc;
+    private $linesOfCode;
 
     /**
      * @var int
      */
-    private $cloc;
+    private $commentLinesOfCode;
 
     /**
      * @var int
      */
-    private $ncloc;
+    private $nonCommentLinesOfCode;
 
     /**
      * @throws IllogicalValuesException
      * @throws NegativeValueException
      */
-    public function __construct(int $loc, int $cloc, int $ncloc)
+    public function __construct(int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode)
     {
-        if ($loc < 0) {
-            throw new NegativeValueException('$loc must not be negative');
+        if ($linesOfCode < 0) {
+            throw new NegativeValueException('$linesOfCode must not be negative');
         }
 
-        if ($cloc < 0) {
-            throw new NegativeValueException('$cloc must not be negative');
+        if ($commentLinesOfCode < 0) {
+            throw new NegativeValueException('$commentLinesOfCode must not be negative');
         }
 
-        if ($ncloc < 0) {
-            throw new NegativeValueException('$ncloc must not be negative');
+        if ($nonCommentLinesOfCode < 0) {
+            throw new NegativeValueException('$nonCommentLinesOfCode must not be negative');
         }
 
-        if ($loc - $cloc !== $ncloc) {
-            throw new IllogicalValuesException('$loc !== $cloc + $ncloc');
+        if ($linesOfCode - $commentLinesOfCode !== $nonCommentLinesOfCode) {
+            throw new IllogicalValuesException('$linesOfCode !== $commentLinesOfCode + $nonCommentLinesOfCode');
         }
 
-        $this->loc   = $loc;
-        $this->cloc  = $cloc;
-        $this->ncloc = $ncloc;
+        $this->linesOfCode           = $linesOfCode;
+        $this->commentLinesOfCode    = $commentLinesOfCode;
+        $this->nonCommentLinesOfCode = $nonCommentLinesOfCode;
     }
 
-    public function loc(): int
+    public function linesOfCode(): int
     {
-        return $this->loc;
+        return $this->linesOfCode;
     }
 
-    public function cloc(): int
+    public function commentLinesOfCode(): int
     {
-        return $this->cloc;
+        return $this->commentLinesOfCode;
     }
 
-    public function ncloc(): int
+    public function nonCommentLinesOfCode(): int
     {
-        return $this->ncloc;
+        return $this->nonCommentLinesOfCode;
     }
 }

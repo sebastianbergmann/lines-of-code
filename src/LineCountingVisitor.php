@@ -12,22 +12,22 @@ namespace SebastianBergmann\LinesOfCode;
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
 
-final class CommentLinesOfCodeVisitor extends NodeVisitorAbstract
+final class LineCountingVisitor extends NodeVisitorAbstract
 {
     /**
      * @var int
      */
-    private $cloc = 0;
+    private $commentLinesOfCode = 0;
 
     public function enterNode(Node $node): void
     {
         foreach ($node->getComments() as $comment) {
-            $this->cloc += ($comment->getEndLine() - $comment->getStartLine() + 1);
+            $this->commentLinesOfCode += ($comment->getEndLine() - $comment->getStartLine() + 1);
         }
     }
 
-    public function cloc(): int
+    public function commentLinesOfCode(): int
     {
-        return $this->cloc;
+        return $this->commentLinesOfCode;
     }
 }

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \SebastianBergmann\LinesOfCode\Counter
- * @covers \SebastianBergmann\LinesOfCode\CommentLinesOfCodeVisitor
+ * @covers \SebastianBergmann\LinesOfCode\LineCountingVisitor
  *
  * @uses \SebastianBergmann\LinesOfCode\LinesOfCode
  *
@@ -27,18 +27,18 @@ final class CounterTest extends TestCase
     {
         $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/ExampleClass.php');
 
-        $this->assertSame(51, $count->loc());
-        $this->assertSame(13, $count->cloc());
-        $this->assertSame(38, $count->ncloc());
+        $this->assertSame(51, $count->linesOfCode());
+        $this->assertSame(13, $count->commentLinesOfCode());
+        $this->assertSame(38, $count->nonCommentLinesOfCode());
     }
 
     public function testCountsLinesOfCodeInSourceString(): void
     {
         $count = (new Counter)->countInSourceString(file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'));
 
-        $this->assertSame(51, $count->loc());
-        $this->assertSame(13, $count->cloc());
-        $this->assertSame(38, $count->ncloc());
+        $this->assertSame(51, $count->linesOfCode());
+        $this->assertSame(13, $count->commentLinesOfCode());
+        $this->assertSame(38, $count->nonCommentLinesOfCode());
     }
 
     public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
@@ -49,8 +49,8 @@ final class CounterTest extends TestCase
 
         $count = (new Counter)->countInAbstractSyntaxTree(51, $nodes);
 
-        $this->assertSame(51, $count->loc());
-        $this->assertSame(13, $count->cloc());
-        $this->assertSame(38, $count->ncloc());
+        $this->assertSame(51, $count->linesOfCode());
+        $this->assertSame(13, $count->commentLinesOfCode());
+        $this->assertSame(38, $count->nonCommentLinesOfCode());
     }
 }

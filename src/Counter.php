@@ -59,7 +59,7 @@ final class Counter
     public function countInAbstractSyntaxTree(int $loc, array $nodes): LinesOfCode
     {
         $traverser = new NodeTraverser;
-        $visitor   = new CommentLinesOfCodeVisitor;
+        $visitor   = new LineCountingVisitor;
 
         $traverser->addVisitor($visitor);
 
@@ -76,7 +76,7 @@ final class Counter
         }
         // @codeCoverageIgnoreEnd
 
-        $cloc  = $visitor->cloc();
+        $cloc  = $visitor->commentLinesOfCode();
         $ncloc = $loc - $cloc;
 
         return new LinesOfCode($loc, $cloc, $ncloc);
