@@ -85,4 +85,14 @@ final class LinesOfCode
     {
         return $this->logicalLinesOfCode;
     }
+
+    public function plus(self $other): self
+    {
+        return new self(
+            $this->linesOfCode() + $other->linesOfCode(),
+            $this->commentLinesOfCode() + $other->commentLinesOfCode(),
+            $this->nonCommentLinesOfCode() + $other->nonCommentLinesOfCode(),
+            $this->logicalLinesOfCode() + $other->logicalLinesOfCode(),
+        );
+    }
 }

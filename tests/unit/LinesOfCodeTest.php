@@ -93,6 +93,19 @@ final class LinesOfCodeTest extends TestCase
         new LinesOfCode(1, 2, 2, 0);
     }
 
+    public function testTwoInstancesCanBeAdded(): void
+    {
+        $a = new LinesOfCode(2, 1, 1, 1);
+        $b = new LinesOfCode(4, 2, 2, 2);
+
+        $sum = $a->plus($b);
+
+        $this->assertSame(6, $sum->linesOfCode());
+        $this->assertSame(3, $sum->commentLinesOfCode());
+        $this->assertSame(3, $sum->nonCommentLinesOfCode());
+        $this->assertSame(3, $sum->logicalLinesOfCode());
+    }
+
     private function linesOfCode(): LinesOfCode
     {
         return new LinesOfCode(1, 1, 0, 0);
