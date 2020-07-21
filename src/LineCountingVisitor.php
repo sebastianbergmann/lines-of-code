@@ -19,12 +19,22 @@ final class LineCountingVisitor extends NodeVisitorAbstract
     /**
      * @var int
      */
+    private $linesOfCode;
+
+    /**
+     * @var int
+     */
     private $commentLinesOfCode = 0;
 
     /**
      * @var int[]
      */
     private $linesWithStatements = [];
+
+    public function __construct(int $linesOfCode)
+    {
+        $this->linesOfCode = $linesOfCode;
+    }
 
     public function enterNode(Node $node): void
     {
@@ -35,13 +45,13 @@ final class LineCountingVisitor extends NodeVisitorAbstract
         $this->linesWithStatements[] = $node->getStartLine();
     }
 
-    public function commentLinesOfCode(): int
+    public function result(): LinesOfCode
     {
-        return $this->commentLinesOfCode;
-    }
-
-    public function logicalLinesOfCode(): int
-    {
-        return count(array_unique($this->linesWithStatements));
+        return new LinesOfCode(
+            $this->linesOfCode,
+            $this->commentLinesOfCode,
+            $this->linesOfCode - $this->commentLinesOfCode,
+            count(array_unique($this->linesWithStatements))
+        );
     }
 }

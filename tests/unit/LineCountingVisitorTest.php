@@ -17,6 +17,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \SebastianBergmann\LinesOfCode\LineCountingVisitor
  *
+ * @uses \SebastianBergmann\LinesOfCode\LinesOfCode
+ *
  * @small
  */
 final class LineCountingVisitorTest extends TestCase
@@ -29,14 +31,16 @@ final class LineCountingVisitorTest extends TestCase
 
         $traverser = new NodeTraverser;
 
-        $visitor = new LineCountingVisitor();
+        $visitor = new LineCountingVisitor(51);
 
         $traverser->addVisitor($visitor);
 
         /* @noinspection UnusedFunctionResultInspection */
         $traverser->traverse($nodes);
 
-        $this->assertSame(13, $visitor->commentLinesOfCode());
-        $this->assertSame(23, $visitor->logicalLinesOfCode());
+        $this->assertSame(51, $visitor->result()->linesOfCode());
+        $this->assertSame(13, $visitor->result()->commentLinesOfCode());
+        $this->assertSame(38, $visitor->result()->nonCommentLinesOfCode());
+        $this->assertSame(23, $visitor->result()->logicalLinesOfCode());
     }
 }
