@@ -32,7 +32,7 @@ final class LineCountingVisitorTest extends TestCase
 
         $traverser = new NodeTraverser;
 
-        $visitor = new LineCountingVisitor(51);
+        $visitor = new LineCountingVisitor($linesOfCode);
 
         $traverser->addVisitor($visitor);
 
@@ -54,6 +54,13 @@ final class LineCountingVisitorTest extends TestCase
                 13,
                 38,
                 23,
+            ],
+            [
+                __DIR__ . '/../_fixture/source_with_ignore.php',
+                44,
+                17,
+                27,
+                12,
             ],
         ];
     }

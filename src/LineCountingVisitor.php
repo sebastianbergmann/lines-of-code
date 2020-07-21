@@ -9,8 +9,11 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+use function array_merge;
 use function array_unique;
+use function array_values;
 use function count;
+use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
 
@@ -22,9 +25,9 @@ final class LineCountingVisitor extends NodeVisitorAbstract
     private $linesOfCode;
 
     /**
-     * @var int
+     * @var Comment[]
      */
-    private $commentLinesOfCode = 0;
+    private $comments = [];
 
     /**
      * @var int[]
@@ -38,20 +41,37 @@ final class LineCountingVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node): void
     {
-        foreach ($node->getComments() as $comment) {
-            $this->commentLinesOfCode += ($comment->getEndLine() - $comment->getStartLine() + 1);
-        }
-
+        $this->comments              = array_merge($this->comments, $node->getComments());
         $this->linesWithStatements[] = $node->getStartLine();
     }
 
     public function result(): LinesOfCode
     {
+        $commentLinesOfCode = 0;
+
+        foreach ($this->comments() as $comment) {
+            $commentLinesOfCode += ($comment->getEndLine() - $comment->getStartLine() + 1);
+        }
+
         return new LinesOfCode(
             $this->linesOfCode,
-            $this->commentLinesOfCode,
-            $this->linesOfCode - $this->commentLinesOfCode,
+            $commentLinesOfCode,
+            $this->linesOfCode - $commentLinesOfCode,
             count(array_unique($this->linesWithStatements))
         );
+    }
+
+    /**
+     * @return Comment[]
+     */
+    private function comments(): array
+    {
+        $comments = [];
+
+        foreach ($this->comments as $comment) {
+            $comments[$comment->getStartLine() . '_' . $comment->getStartTokenPos() . '_' . $comment->getEndLine() . '_' . $comment->getEndTokenPos()] = $comment;
+        }
+
+        return $comments;
     }
 }
