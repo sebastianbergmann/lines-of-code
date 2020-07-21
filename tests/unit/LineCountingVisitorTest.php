@@ -23,11 +23,12 @@ use PHPUnit\Framework\TestCase;
  */
 final class LineCountingVisitorTest extends TestCase
 {
-    public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
+    /**
+     * @dataProvider provideData
+     */
+    public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
     {
-        $nodes = (new ParserFactory)->create(ParserFactory::PREFER_PHP7)->parse(
-            file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php')
-        );
+        $nodes = (new ParserFactory)->create(ParserFactory::PREFER_PHP7)->parse(file_get_contents($sourceFile));
 
         $traverser = new NodeTraverser;
 
@@ -38,9 +39,22 @@ final class LineCountingVisitorTest extends TestCase
         /* @noinspection UnusedFunctionResultInspection */
         $traverser->traverse($nodes);
 
-        $this->assertSame(51, $visitor->result()->linesOfCode());
-        $this->assertSame(13, $visitor->result()->commentLinesOfCode());
-        $this->assertSame(38, $visitor->result()->nonCommentLinesOfCode());
-        $this->assertSame(23, $visitor->result()->logicalLinesOfCode());
+        $this->assertSame($linesOfCode, $visitor->result()->linesOfCode());
+        $this->assertSame($commentLinesOfCode, $visitor->result()->commentLinesOfCode());
+        $this->assertSame($nonCommentLinesOfCode, $visitor->result()->nonCommentLinesOfCode());
+        $this->assertSame($logicalLinesOfCode, $visitor->result()->logicalLinesOfCode());
+    }
+
+    public function provideData(): array
+    {
+        return [
+            [
+                __DIR__ . '/../_fixture/ExampleClass.php',
+                51,
+                13,
+                38,
+                23,
+            ],
+        ];
     }
 }
