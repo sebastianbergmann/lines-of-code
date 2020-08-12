@@ -10,6 +10,8 @@
 namespace SebastianBergmann\LinesOfCode;
 
 use function file_get_contents;
+use PhpParser\Lexer;
+use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -45,7 +47,9 @@ final class CounterTest extends TestCase
 
     public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
     {
-        $nodes = (new ParserFactory)->create(ParserFactory::PREFER_PHP7)->parse(file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'));
+        $nodes = $this->parser()->parse(
+            file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php')
+        );
 
         assert($nodes !== null);
 
@@ -55,5 +59,10 @@ final class CounterTest extends TestCase
         $this->assertSame(13, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
         $this->assertSame(23, $count->logicalLinesOfCode());
+    }
+
+    private function parser(): Parser
+    {
+        return (new ParserFactory)->create(ParserFactory::PREFER_PHP7, new Lexer);
     }
 }

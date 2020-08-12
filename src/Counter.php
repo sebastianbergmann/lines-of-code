@@ -11,8 +11,10 @@ namespace SebastianBergmann\LinesOfCode;
 
 use function substr_count;
 use PhpParser\Error;
+use PhpParser\Lexer;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
+use PhpParser\Parser;
 use PhpParser\ParserFactory;
 
 final class Counter
@@ -31,10 +33,9 @@ final class Counter
     public function countInSourceString(string $source): LinesOfCode
     {
         $linesOfCode = substr_count($source, "\n");
-        $parser      = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
 
         try {
-            $nodes = $parser->parse($source);
+            $nodes = $this->parser()->parse($source);
 
             assert($nodes !== null);
 
@@ -77,5 +78,10 @@ final class Counter
         // @codeCoverageIgnoreEnd
 
         return $visitor->result();
+    }
+
+    private function parser(): Parser
+    {
+        return (new ParserFactory)->create(ParserFactory::PREFER_PHP7, new Lexer);
     }
 }
