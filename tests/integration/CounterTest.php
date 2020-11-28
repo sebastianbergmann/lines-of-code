@@ -29,8 +29,8 @@ final class CounterTest extends TestCase
     {
         $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/ExampleClass.php');
 
-        $this->assertSame(51, $count->linesOfCode());
-        $this->assertSame(13, $count->commentLinesOfCode());
+        $this->assertSame(43, $count->linesOfCode());
+        $this->assertSame(5, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
         $this->assertSame(23, $count->logicalLinesOfCode());
     }
@@ -39,8 +39,8 @@ final class CounterTest extends TestCase
     {
         $count = (new Counter)->countInSourceString(file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'));
 
-        $this->assertSame(51, $count->linesOfCode());
-        $this->assertSame(13, $count->commentLinesOfCode());
+        $this->assertSame(43, $count->linesOfCode());
+        $this->assertSame(5, $count->commentLinesOfCode());
         $this->assertSame(38, $count->nonCommentLinesOfCode());
         $this->assertSame(23, $count->logicalLinesOfCode());
     }
@@ -56,8 +56,8 @@ final class CounterTest extends TestCase
         $count = (new Counter)->countInAbstractSyntaxTree(51, $nodes);
 
         $this->assertSame(51, $count->linesOfCode());
-        $this->assertSame(13, $count->commentLinesOfCode());
-        $this->assertSame(38, $count->nonCommentLinesOfCode());
+        $this->assertSame(5, $count->commentLinesOfCode());
+        $this->assertSame(46, $count->nonCommentLinesOfCode());
         $this->assertSame(23, $count->logicalLinesOfCode());
     }
 

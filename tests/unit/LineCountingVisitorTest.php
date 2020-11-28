@@ -55,15 +55,15 @@ final class LineCountingVisitorTest extends TestCase
             [
                 __DIR__ . '/../_fixture/ExampleClass.php',
                 51,
-                13,
-                38,
+                5,
+                46,
                 23,
             ],
             [
                 __DIR__ . '/../_fixture/source_with_ignore.php',
                 44,
-                17,
-                27,
+                9,
+                35,
                 12,
             ],
         ];
