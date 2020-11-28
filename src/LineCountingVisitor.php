@@ -14,6 +14,7 @@ use function array_unique;
 use function count;
 use PhpParser\Comment;
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\NodeVisitorAbstract;
 
 final class LineCountingVisitor extends NodeVisitorAbstract
@@ -40,7 +41,12 @@ final class LineCountingVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node): void
     {
-        $this->comments              = array_merge($this->comments, $node->getComments());
+        $this->comments = array_merge($this->comments, $node->getComments());
+
+        if (!$node instanceof Expr) {
+            return;
+        }
+
         $this->linesWithStatements[] = $node->getStartLine();
     }
 
