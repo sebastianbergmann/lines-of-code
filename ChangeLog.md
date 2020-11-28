@@ -4,6 +4,10 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 ## [1.0.3] - 2020-MM-DD
 
+### Fixed
+
+* Files that do not contain a newline were not handled correctly
+
 ### Changed
 
 * A line of code is no longer considered to be a Logical Line of Code if it does not contain an `Expr` node

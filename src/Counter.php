@@ -34,6 +34,10 @@ final class Counter
     {
         $linesOfCode = substr_count($source, "\n");
 
+        if ($linesOfCode === 0 && !empty($source)) {
+            $linesOfCode = 1;
+        }
+
         try {
             $nodes = $this->parser()->parse($source);
 

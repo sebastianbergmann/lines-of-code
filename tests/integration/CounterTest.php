@@ -61,6 +61,16 @@ final class CounterTest extends TestCase
         $this->assertSame(13, $count->logicalLinesOfCode());
     }
 
+    public function testHandlesFileWithoutNewline(): void
+    {
+        $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/source_without_newline.php');
+
+        $this->assertSame(1, $count->linesOfCode());
+        $this->assertSame(1, $count->commentLinesOfCode());
+        $this->assertSame(0, $count->nonCommentLinesOfCode());
+        $this->assertSame(0, $count->logicalLinesOfCode());
+    }
+
     private function parser(): Parser
     {
         return (new ParserFactory)->create(ParserFactory::PREFER_PHP7, new Lexer);

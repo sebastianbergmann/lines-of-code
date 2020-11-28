@@ -66,6 +66,13 @@ final class LineCountingVisitorTest extends TestCase
                 35,
                 4,
             ],
+            [
+                __DIR__ . '/../_fixture/source_without_newline.php',
+                1,
+                1,
+                0,
+                0,
+            ],
         ];
     }
 
