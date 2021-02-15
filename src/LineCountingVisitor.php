@@ -19,20 +19,17 @@ use PhpParser\NodeVisitorAbstract;
 
 final class LineCountingVisitor extends NodeVisitorAbstract
 {
-    /**
-     * @var int
-     */
-    private $linesOfCode;
+    private int $linesOfCode;
 
     /**
      * @var Comment[]
      */
-    private $comments = [];
+    private array $comments = [];
 
     /**
      * @var int[]
      */
-    private $linesWithStatements = [];
+    private array $linesWithStatements = [];
 
     public function __construct(int $linesOfCode)
     {
