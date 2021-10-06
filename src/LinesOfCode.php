@@ -80,7 +80,7 @@ final class LinesOfCode
             $this->linesOfCode() + $other->linesOfCode(),
             $this->commentLinesOfCode() + $other->commentLinesOfCode(),
             $this->nonCommentLinesOfCode() + $other->nonCommentLinesOfCode(),
-            $this->logicalLinesOfCode() + $other->logicalLinesOfCode(),
+            $this->logicalLinesOfCode() + $other->logicalLinesOfCode()
         );
     }
 }
