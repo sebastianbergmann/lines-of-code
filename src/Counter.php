@@ -49,7 +49,7 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
-                (int) $error->getCode(),
+                $error->getCode(),
                 $error
             );
         }
@@ -75,7 +75,7 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
-                (int) $error->getCode(),
+                $error->getCode(),
                 $error
             );
         }
