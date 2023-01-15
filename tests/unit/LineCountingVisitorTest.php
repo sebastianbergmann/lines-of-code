@@ -25,31 +25,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class LineCountingVisitorTest extends TestCase
 {
-    /**
-     * @dataProvider provideData
-     */
-    public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
-    {
-        $nodes = $this->parser()->parse(
-            file_get_contents($sourceFile)
-        );
-
-        $traverser = new NodeTraverser;
-
-        $visitor = new LineCountingVisitor($linesOfCode);
-
-        $traverser->addVisitor($visitor);
-
-        /* @noinspection UnusedFunctionResultInspection */
-        $traverser->traverse($nodes);
-
-        $this->assertSame($linesOfCode, $visitor->result()->linesOfCode());
-        $this->assertSame($commentLinesOfCode, $visitor->result()->commentLinesOfCode());
-        $this->assertSame($nonCommentLinesOfCode, $visitor->result()->nonCommentLinesOfCode());
-        $this->assertSame($logicalLinesOfCode, $visitor->result()->logicalLinesOfCode());
-    }
-
-    public function provideData(): array
+    public static function provideData(): array
     {
         return [
             [
@@ -74,6 +50,30 @@ final class LineCountingVisitorTest extends TestCase
                 0,
             ],
         ];
+    }
+
+    /**
+     * @dataProvider provideData
+     */
+    public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
+    {
+        $nodes = $this->parser()->parse(
+            file_get_contents($sourceFile)
+        );
+
+        $traverser = new NodeTraverser;
+
+        $visitor = new LineCountingVisitor($linesOfCode);
+
+        $traverser->addVisitor($visitor);
+
+        /* @noinspection UnusedFunctionResultInspection */
+        $traverser->traverse($nodes);
+
+        $this->assertSame($linesOfCode, $visitor->result()->linesOfCode());
+        $this->assertSame($commentLinesOfCode, $visitor->result()->commentLinesOfCode());
+        $this->assertSame($nonCommentLinesOfCode, $visitor->result()->nonCommentLinesOfCode());
+        $this->assertSame($logicalLinesOfCode, $visitor->result()->logicalLinesOfCode());
     }
 
     private function parser(): Parser
