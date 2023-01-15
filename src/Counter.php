@@ -9,6 +9,8 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+use function assert;
+use function file_get_contents;
 use function substr_count;
 use PhpParser\Error;
 use PhpParser\Lexer;

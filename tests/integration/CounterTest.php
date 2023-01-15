@@ -9,6 +9,7 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+use function assert;
 use function file_get_contents;
 use PhpParser\Lexer;
 use PhpParser\Parser;

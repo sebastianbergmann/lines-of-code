@@ -15,11 +15,8 @@ namespace SebastianBergmann\LinesOfCode;
 final class LinesOfCode
 {
     private int $linesOfCode;
-
     private int $commentLinesOfCode;
-
     private int $nonCommentLinesOfCode;
-
     private int $logicalLinesOfCode;
 
     /**
