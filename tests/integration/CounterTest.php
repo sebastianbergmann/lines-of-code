@@ -14,16 +14,13 @@ use function file_get_contents;
 use PhpParser\Lexer;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \SebastianBergmann\LinesOfCode\Counter
- * @covers \SebastianBergmann\LinesOfCode\LineCountingVisitor
- *
- * @uses \SebastianBergmann\LinesOfCode\LinesOfCode
- *
- * @medium
- */
+#[CoversClass(Counter::class)]
+#[CoversClass(LineCountingVisitor::class)]
+#[Medium]
 final class CounterTest extends TestCase
 {
     public function testCountsLinesOfCodeInSourceFile(): void

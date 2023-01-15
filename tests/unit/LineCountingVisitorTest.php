@@ -14,15 +14,15 @@ use PhpParser\Lexer;
 use PhpParser\NodeTraverser;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Small;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \SebastianBergmann\LinesOfCode\LineCountingVisitor
- *
- * @uses \SebastianBergmann\LinesOfCode\LinesOfCode
- *
- * @small
- */
+#[CoversClass(LineCountingVisitor::class)]
+#[UsesClass(LinesOfCode::class)]
+#[Small]
 final class LineCountingVisitorTest extends TestCase
 {
     public static function provideData(): array
@@ -52,9 +52,7 @@ final class LineCountingVisitorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideData
-     */
+    #[DataProvider('provideData')]
     public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
     {
         $nodes = $this->parser()->parse(

@@ -9,42 +9,34 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \SebastianBergmann\LinesOfCode\LinesOfCode
- *
- * @small
- */
+#[CoversClass(LinesOfCode::class)]
+#[Small]
 final class LinesOfCodeTest extends TestCase
 {
-    /**
-     * @testdox Has Lines of Code (LOC)
-     */
+    #[TestDox('Has Lines of Code (LOC)')]
     public function testHasLinesOfCode(): void
     {
         $this->assertSame(1, $this->linesOfCode()->linesOfCode());
     }
 
-    /**
-     * @testdox Has Comment Lines of Code (CLOC)
-     */
+    #[TestDox('Has Comment Lines of Code (CLOC)')]
     public function testHasCommentLinesOfCode(): void
     {
         $this->assertSame(1, $this->linesOfCode()->commentLinesOfCode());
     }
 
-    /**
-     * @testdox Has Non-Comment Lines of Code (NCLOC)
-     */
+    #[TestDox('Has Non-Comment Lines of Code (NCLOC)')]
     public function testHasNonCommentLinesOfCode(): void
     {
         $this->assertSame(0, $this->linesOfCode()->nonCommentLinesOfCode());
     }
 
-    /**
-     * @testdox Has Logical Lines of Code (LLOC)
-     */
+    #[TestDox('Has Logical Lines of Code (LLOC)')]
     public function testHasLogicalLinesOfCode(): void
     {
         $this->assertSame(0, $this->linesOfCode()->logicalLinesOfCode());
@@ -82,9 +74,7 @@ final class LinesOfCodeTest extends TestCase
         new LinesOfCode(0, 0, 0, -1);
     }
 
-    /**
-     * @testdox Lines of Code = Comment Lines of Code + Non-Comment Lines of Code
-     */
+    #[TestDox('Lines of Code = Comment Lines of Code + Non-Comment Lines of Code')]
     public function testNumbersHaveToMakeSense(): void
     {
         $this->expectException(IllogicalValuesException::class);
