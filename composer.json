@@ -12,7 +12,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/sebastianbergmann/lines-of-code/issues"
+        "issues": "https://github.com/sebastianbergmann/lines-of-code/issues",
+        "security": "https://github.com/sebastianbergmann/lines-of-code/security/policy"
     },
     "prefer-stable": true,
     "require": {
