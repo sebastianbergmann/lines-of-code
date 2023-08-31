@@ -52,7 +52,7 @@ final class Counter
             throw new RuntimeException(
                 $error->getMessage(),
                 $error->getCode(),
-                $error
+                $error,
             );
         }
         // @codeCoverageIgnoreEnd
@@ -78,7 +78,7 @@ final class Counter
             throw new RuntimeException(
                 $error->getMessage(),
                 $error->getCode(),
-                $error
+                $error,
             );
         }
         // @codeCoverageIgnoreEnd

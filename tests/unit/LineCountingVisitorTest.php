@@ -56,7 +56,7 @@ final class LineCountingVisitorTest extends TestCase
     public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
     {
         $nodes = $this->parser()->parse(
-            file_get_contents($sourceFile)
+            file_get_contents($sourceFile),
         );
 
         $traverser = new NodeTraverser;

@@ -46,7 +46,7 @@ final class CounterTest extends TestCase
     public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
     {
         $nodes = $this->parser()->parse(
-            file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php')
+            file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'),
         );
 
         assert($nodes !== null);
