@@ -40,6 +40,8 @@ final class Counter
             $linesOfCode = 1;
         }
 
+        assert($linesOfCode >= 0);
+
         try {
             $nodes = $this->parser()->parse($source);
 
@@ -59,6 +61,8 @@ final class Counter
     }
 
     /**
+     * @psalm-param non-negative-int $linesOfCode
+     *
      * @param Node[] $nodes
      *
      * @throws RuntimeException
