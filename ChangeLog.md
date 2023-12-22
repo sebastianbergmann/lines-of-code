@@ -2,7 +2,7 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
-## [1.0.4] - 2023-12-DD
+## [1.0.4] - 2023-12-22
 
 ### Changed
 
@@ -34,7 +34,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Initial release
 
-[1.0.4]: https://github.com/sebastianbergmann/lines-of-code/compare/1.0.3...1.0
+[1.0.4]: https://github.com/sebastianbergmann/lines-of-code/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/sebastianbergmann/lines-of-code/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/sebastianbergmann/lines-of-code/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/sebastianbergmann/lines-of-code/compare/1.0.0...1.0.1
