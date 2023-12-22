@@ -10,9 +10,7 @@
 namespace SebastianBergmann\LinesOfCode;
 
 use function file_get_contents;
-use PhpParser\Lexer;
 use PhpParser\NodeTraverser;
-use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +28,7 @@ final class LineCountingVisitorTest extends TestCase
      */
     public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
     {
-        $nodes = $this->parser()->parse(
+        $nodes = (new ParserFactory)->createForHostVersion()->parse(
             file_get_contents($sourceFile)
         );
 
@@ -74,10 +72,5 @@ final class LineCountingVisitorTest extends TestCase
                 0,
             ],
         ];
-    }
-
-    private function parser(): Parser
-    {
-        return (new ParserFactory)->create(ParserFactory::PREFER_PHP7, new Lexer);
     }
 }
