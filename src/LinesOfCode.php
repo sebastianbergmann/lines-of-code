@@ -12,27 +12,27 @@ namespace SebastianBergmann\LinesOfCode;
 /**
  * @psalm-immutable
  */
-final class LinesOfCode
+final readonly class LinesOfCode
 {
     /**
      * @psalm-var non-negative-int
      */
-    private readonly int $linesOfCode;
+    private int $linesOfCode;
 
     /**
      * @psalm-var non-negative-int
      */
-    private readonly int $commentLinesOfCode;
+    private int $commentLinesOfCode;
 
     /**
      * @psalm-var non-negative-int
      */
-    private readonly int $nonCommentLinesOfCode;
+    private int $nonCommentLinesOfCode;
 
     /**
      * @psalm-var non-negative-int
      */
-    private readonly int $logicalLinesOfCode;
+    private int $logicalLinesOfCode;
 
     /**
      * @psalm-param non-negative-int $linesOfCode
