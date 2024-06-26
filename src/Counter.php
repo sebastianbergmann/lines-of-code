@@ -60,8 +60,7 @@ final class Counter
 
     /**
      * @param non-negative-int $linesOfCode
-     *
-     * @param Node[] $nodes
+     * @param Node[]           $nodes
      *
      * @throws RuntimeException
      */
