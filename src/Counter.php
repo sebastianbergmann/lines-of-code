@@ -59,7 +59,7 @@ final class Counter
     }
 
     /**
-     * @psalm-param non-negative-int $linesOfCode
+     * @param non-negative-int $linesOfCode
      *
      * @param Node[] $nodes
      *
