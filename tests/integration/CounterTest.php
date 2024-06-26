@@ -33,7 +33,11 @@ final class CounterTest extends TestCase
 
     public function testCountsLinesOfCodeInSourceString(): void
     {
-        $count = (new Counter)->countInSourceString(file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'));
+        $source = file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php');
+
+        assert($source !== false);
+
+        $count = (new Counter)->countInSourceString($source);
 
         $this->assertSame(43, $count->linesOfCode());
         $this->assertSame(5, $count->commentLinesOfCode());
@@ -43,9 +47,11 @@ final class CounterTest extends TestCase
 
     public function testCountsLinesOfCodeInAbstractSyntaxTree(): void
     {
-        $nodes = (new ParserFactory)->createForHostVersion()->parse(
-            file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php'),
-        );
+        $source = file_get_contents(__DIR__ . '/../_fixture/ExampleClass.php');
+
+        assert($source !== false);
+
+        $nodes = (new ParserFactory)->createForHostVersion()->parse($source);
 
         assert($nodes !== null);
 

@@ -47,6 +47,7 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$linesOfCode must not be negative');
 
+        /** @phpstan-ignore argument.type */
         new LinesOfCode(-1, 0, 0, 0);
     }
 
@@ -55,6 +56,7 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$commentLinesOfCode must not be negative');
 
+        /** @phpstan-ignore argument.type */
         new LinesOfCode(0, -1, 0, 0);
     }
 
@@ -63,6 +65,7 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$nonCommentLinesOfCode must not be negative');
 
+        /** @phpstan-ignore argument.type */
         new LinesOfCode(0, 0, -1, 0);
     }
 
@@ -71,6 +74,7 @@ final class LinesOfCodeTest extends TestCase
         $this->expectException(NegativeValueException::class);
         $this->expectExceptionMessage('$logicalLinesOfCode must not be negative');
 
+        /** @phpstan-ignore argument.type */
         new LinesOfCode(0, 0, 0, -1);
     }
 

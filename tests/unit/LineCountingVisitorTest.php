@@ -9,6 +9,7 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+use function assert;
 use function file_get_contents;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
@@ -23,6 +24,9 @@ use PHPUnit\Framework\TestCase;
 #[Small]
 final class LineCountingVisitorTest extends TestCase
 {
+    /**
+     * @return non-empty-list<array{0: non-empty-string, 1: positive-int, 2: int, 3: int, 4: int}>
+     */
     public static function provideData(): array
     {
         return [
@@ -50,12 +54,23 @@ final class LineCountingVisitorTest extends TestCase
         ];
     }
 
+    /**
+     * @param non-empty-string $sourceFile
+     * @param positive-int     $linesOfCode
+     * @param non-negative-int $commentLinesOfCode
+     * @param non-negative-int $nonCommentLinesOfCode
+     * @param non-negative-int $logicalLinesOfCode
+     */
     #[DataProvider('provideData')]
     public function testCountsLinesOfCodeInAbstractSyntaxTree(string $sourceFile, int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode): void
     {
-        $nodes = (new ParserFactory)->createForHostVersion()->parse(
-            file_get_contents($sourceFile),
-        );
+        $source = file_get_contents($sourceFile);
+
+        assert($source !== false);
+
+        $nodes = (new ParserFactory)->createForHostVersion()->parse($source);
+
+        assert($nodes !== null);
 
         $traverser = new NodeTraverser;
 

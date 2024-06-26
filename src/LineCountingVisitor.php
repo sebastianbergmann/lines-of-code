@@ -67,7 +67,6 @@ final class LineCountingVisitor extends NodeVisitorAbstract
 
         assert($commentLinesOfCode >= 0);
         assert($nonCommentLinesOfCode >= 0);
-        assert($logicalLinesOfCode >= 0);
 
         return new LinesOfCode(
             $this->linesOfCode,

@@ -45,22 +45,22 @@ final readonly class LinesOfCode
      */
     public function __construct(int $linesOfCode, int $commentLinesOfCode, int $nonCommentLinesOfCode, int $logicalLinesOfCode)
     {
-        /** @suppress DocblockTypeContradiction */
+        /** @phpstan-ignore smaller.alwaysFalse */
         if ($linesOfCode < 0) {
             throw new NegativeValueException('$linesOfCode must not be negative');
         }
 
-        /** @suppress DocblockTypeContradiction */
+        /** @phpstan-ignore smaller.alwaysFalse */
         if ($commentLinesOfCode < 0) {
             throw new NegativeValueException('$commentLinesOfCode must not be negative');
         }
 
-        /** @suppress DocblockTypeContradiction */
+        /** @phpstan-ignore smaller.alwaysFalse */
         if ($nonCommentLinesOfCode < 0) {
             throw new NegativeValueException('$nonCommentLinesOfCode must not be negative');
         }
 
-        /** @suppress DocblockTypeContradiction */
+        /** @phpstan-ignore smaller.alwaysFalse */
         if ($logicalLinesOfCode < 0) {
             throw new NegativeValueException('$logicalLinesOfCode must not be negative');
         }
