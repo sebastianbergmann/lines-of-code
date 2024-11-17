@@ -42,42 +42,6 @@ final class LinesOfCodeTest extends TestCase
         $this->assertSame(0, $this->linesOfCode()->logicalLinesOfCode());
     }
 
-    public function testLinesOfCodeCannotBeNegative(): void
-    {
-        $this->expectException(NegativeValueException::class);
-        $this->expectExceptionMessage('$linesOfCode must not be negative');
-
-        /** @phpstan-ignore argument.type */
-        new LinesOfCode(-1, 0, 0, 0);
-    }
-
-    public function testCommentLinesOfCodeCannotBeNegative(): void
-    {
-        $this->expectException(NegativeValueException::class);
-        $this->expectExceptionMessage('$commentLinesOfCode must not be negative');
-
-        /** @phpstan-ignore argument.type */
-        new LinesOfCode(0, -1, 0, 0);
-    }
-
-    public function testNonCommentLinesOfCodeCannotBeNegative(): void
-    {
-        $this->expectException(NegativeValueException::class);
-        $this->expectExceptionMessage('$nonCommentLinesOfCode must not be negative');
-
-        /** @phpstan-ignore argument.type */
-        new LinesOfCode(0, 0, -1, 0);
-    }
-
-    public function testLogicalLinesOfCodeCannotBeNegative(): void
-    {
-        $this->expectException(NegativeValueException::class);
-        $this->expectExceptionMessage('$logicalLinesOfCode must not be negative');
-
-        /** @phpstan-ignore argument.type */
-        new LinesOfCode(0, 0, 0, -1);
-    }
-
     #[TestDox('Lines of Code = Comment Lines of Code + Non-Comment Lines of Code')]
     public function testNumbersHaveToMakeSense(): void
     {

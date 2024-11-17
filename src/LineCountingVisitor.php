@@ -43,15 +43,17 @@ final class LineCountingVisitor extends NodeVisitorAbstract
         $this->linesOfCode = $linesOfCode;
     }
 
-    public function enterNode(Node $node): void
+    public function enterNode(Node $node): null
     {
         $this->comments = array_merge($this->comments, $node->getComments());
 
         if (!$node instanceof Expr) {
-            return;
+            return null;
         }
 
         $this->linesWithStatements[] = $node->getStartLine();
+
+        return null;
     }
 
     public function result(): LinesOfCode
