@@ -59,9 +59,9 @@ final class Counter
     }
 
     /**
-     * @psalm-param non-negative-int $linesOfCode
-     *
      * @param Node[] $nodes
+     *
+     * @psalm-param non-negative-int $linesOfCode
      *
      * @throws RuntimeException
      */
