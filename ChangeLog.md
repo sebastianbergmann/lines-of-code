@@ -2,6 +2,12 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [5.0.0] - 2026-02-06
+
+### Removed
+
+* This component is no longer supported on PHP 8.3
+
 ## [4.0.0] - 2025-02-07
 
 ### Removed
@@ -65,6 +71,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Initial release
 
+[5.0.0]: https://github.com/sebastianbergmann/lines-of-code/compare/4.0...main
 [4.0.0]: https://github.com/sebastianbergmann/lines-of-code/compare/3.0...4.0.0
 [3.0.1]: https://github.com/sebastianbergmann/lines-of-code/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/sebastianbergmann/lines-of-code/compare/2.0...3.0.0
