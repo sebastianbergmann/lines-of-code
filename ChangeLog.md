@@ -2,7 +2,7 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
-## [5.0.1] - 2026-MM-DD
+## [5.0.1] - 2026-05-19
 
 ### Fixed
 
@@ -83,7 +83,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Initial release
 
-[5.0.1]: https://github.com/sebastianbergmann/lines-of-code/compare/5.0.0...main
+[5.0.1]: https://github.com/sebastianbergmann/lines-of-code/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/sebastianbergmann/lines-of-code/compare/4.0...5.0.0
 [4.0.1]: https://github.com/sebastianbergmann/lines-of-code/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/sebastianbergmann/lines-of-code/compare/3.0...4.0.0
