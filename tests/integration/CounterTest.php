@@ -14,6 +14,7 @@ use function file_get_contents;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Medium;
+use PHPUnit\Framework\Attributes\Ticket;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Counter::class)]
@@ -71,5 +72,48 @@ final class CounterTest extends TestCase
         $this->assertSame(1, $count->commentLinesOfCode());
         $this->assertSame(0, $count->nonCommentLinesOfCode());
         $this->assertSame(0, $count->logicalLinesOfCode());
+    }
+
+    #[Ticket('https://github.com/sebastianbergmann/lines-of-code/issues/5')]
+    public function testHandlesFileWithoutComments(): void
+    {
+        $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/issue_5.php');
+
+        $this->assertSame(3, $count->linesOfCode());
+        $this->assertSame(0, $count->commentLinesOfCode());
+        $this->assertSame(3, $count->nonCommentLinesOfCode());
+        $this->assertSame(2, $count->logicalLinesOfCode());
+    }
+
+    /**
+     * A line is counted as a comment line only once, even when it contains
+     * more than one comment. Previously, each comment contributed its line
+     * span to the count, which could inflate the number of comment lines
+     * beyond the number of lines in the file and yield a negative number of
+     * non-comment lines.
+     */
+    #[Ticket('https://github.com/sebastianbergmann/lines-of-code/issues/6')]
+    public function testHandlesFileWithMultipleCommentsPerLine(): void
+    {
+        $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/issue_6.php');
+
+        $this->assertSame(10, $count->linesOfCode());
+        $this->assertSame(6, $count->commentLinesOfCode());
+        $this->assertSame(4, $count->nonCommentLinesOfCode());
+        $this->assertSame(6, $count->logicalLinesOfCode());
+    }
+
+    /**
+     * A line that contains both code and a comment is counted as a comment
+     * line.
+     */
+    public function testCountsLineWithCodeAndCommentAsCommentLine(): void
+    {
+        $count = (new Counter)->countInSourceFile(__DIR__ . '/../_fixture/mixed_line.php');
+
+        $this->assertSame(5, $count->linesOfCode());
+        $this->assertSame(1, $count->commentLinesOfCode());
+        $this->assertSame(4, $count->nonCommentLinesOfCode());
+        $this->assertSame(4, $count->logicalLinesOfCode());
     }
 }

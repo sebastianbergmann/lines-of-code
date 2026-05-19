@@ -51,6 +51,30 @@ final class LineCountingVisitorTest extends TestCase
                 0,
                 0,
             ],
+            // https://github.com/sebastianbergmann/lines-of-code/issues/5
+            [
+                __DIR__ . '/../_fixture/issue_5.php',
+                3,
+                0,
+                3,
+                2,
+            ],
+            // https://github.com/sebastianbergmann/lines-of-code/issues/6
+            [
+                __DIR__ . '/../_fixture/issue_6.php',
+                10,
+                6,
+                4,
+                6,
+            ],
+            // A line that contains both code and a comment is a comment line
+            [
+                __DIR__ . '/../_fixture/mixed_line.php',
+                5,
+                1,
+                4,
+                4,
+            ],
         ];
     }
 
