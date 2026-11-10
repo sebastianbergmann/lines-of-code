@@ -46,7 +46,7 @@ final class LinesOfCodeTest extends TestCase
     public function testNumbersHaveToMakeSense(): void
     {
         $this->expectException(IllogicalValuesException::class);
-        $this->expectExceptionMessage('$linesOfCode !== $commentLinesOfCode + $nonCommentLinesOfCode');
+        $this->expectExceptionMessageIs('$linesOfCode !== $commentLinesOfCode + $nonCommentLinesOfCode');
 
         new LinesOfCode(1, 2, 2, 0);
     }
