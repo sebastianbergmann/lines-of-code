@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '4.0.x-dev',
-        'version' => '4.0.9999999.9999999-dev',
-        'reference' => '3a116ba26b361156f07a777ca866b86e53c260d0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '995a4b6908ee83b37d10f6a9adbe9158c79b11b8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '4.0.x-dev',
-            'version' => '4.0.9999999.9999999-dev',
-            'reference' => '3a116ba26b361156f07a777ca866b86e53c260d0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '995a4b6908ee83b37d10f6a9adbe9158c79b11b8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,13 +22,13 @@
         'friendsofphp/php-cs-fixer' => array(
             'dev_requirement' => true,
             'replaced' => array(
-                0 => 'v3.95.30',
+                0 => 'v3.95.31',
             ),
         ),
         'php-cs-fixer/shim' => array(
-            'pretty_version' => 'v3.95.30',
-            'version' => '3.95.30.0',
-            'reference' => '413c9705404163fa3e5f7854208c5e9ae1a4590d',
+            'pretty_version' => 'v3.95.31',
+            'version' => '3.95.31.0',
+            'reference' => 'ecc5bd6c3a8151488dc6b9a81502655726bd0f1b',
             'type' => 'application',
             'install_path' => __DIR__ . '/../php-cs-fixer/shim',
             'aliases' => array(),
